@@ -145,5 +145,6 @@ class UserAgentMiddleware(object):
         request.headers['Accept'] ='text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
         request.headers['Accept-Encoding'] = 'gzip, deflate, sdch, br'
         request.headers['Accept-Language'] = 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3'
+        request.headers['Content-Type'] = "application/json;charset=utf-8"
         ip = random.choice(self.ip)
         request.meta['splash']['args']['proxy'] = ip

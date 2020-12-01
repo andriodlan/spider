@@ -11,6 +11,18 @@ class DazhongItem(scrapy.Item):
     price  = scrapy.Field()
     title = scrapy.Field()
 
+class xinyangItem(scrapy.Item):
+    city = scrapy.Field()
+    level = scrapy.Field()
+    shop_name = scrapy.Field()
+    price  = scrapy.Field()
+    title = scrapy.Field()
+    product__appointment = scrapy.Field()
+    sale = scrapy.Field()
+    daliy = scrapy.Field()
+    comment = scrapy.Field()
+
+
 
 class StoreUrlItem(scrapy.Item):
 
