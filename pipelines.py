@@ -41,7 +41,7 @@ class MysqlPipeline(object):
 
         def insert_db(self, cur, item):
             # 取出数据，执行cur sql
-            if item['level'] == "dazhang":
+            if item['level'] == "大众":
                 values = (
                     item['shop_name'],
                     item['title'],
@@ -49,19 +49,18 @@ class MysqlPipeline(object):
                 )
                 sql = 'INSERT INTO ruigang.guangzhoudazhong VALUES (%s,%s,%s)'
                 cur.execute(sql, values)
-            elif item['level'] == "xinyang":
+            elif item['level'] == "新氧":
                     values = (
                         item['city'],
                         item['shop_name'],
                         item['price'],
                         item['title'],
                         item['product__appointment'],
-                        item['sale'],
                         item['daliy'],
-                        item['comment'],
+                        item['comment']
 
                     )
-                    sql = 'INSERT INTO ruigang.guangzhoudazhong VALUES (%s,%s,%s,%s,%s,%s,%s,%s)'
+                    sql = 'INSERT INTO ruigang.xinyang VALUES (%s,%s,%s,%s,%s,%s,%s)'
                     cur.execute(sql, values)
 
 
