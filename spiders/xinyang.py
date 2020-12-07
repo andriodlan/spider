@@ -79,16 +79,29 @@ class dazhongSpider(Spider):
     def parse(self,response):
         xinyang = xinyangItem()
         if response.meta['city'] == "s0p0l0m0i0t0a289h0o0c2":
-            xinyang['city '] = "广州"
+            xinyang['city'] = "广州"
         else:
             xinyang['city'] = "深圳"
         xinyang['level']="新氧"
+        shop_nameTemop = xinyang['shop_name'] = response.xpath('.//*[@id="hospitalWrap"]/div/div[3]/h2/a/text()').extract()
+        if isinstance(shop_nameTemop, list):
+            xinyang['shop_name'] = response.xpath('.//*[@id="hospitalWrap"]/div/div[3]/h2/a/text()').extract()[0]
+        else:
+            xinyang['shop_name'] = response.xpath('.//*[@id="hospitalWrap"]/div/div[3]/h2/a/text()').extract()
         xinyang['shop_name'] = response.xpath('.//*[@id="hospitalWrap"]/div/div[3]/h2/a/text()').extract()[0]
-        print(xinyang['shop_name'])
-        xinyang['price'] = response.xpath('.//*[@id="baseInfo"]/div[1]/em/text()').extract()[0]
+        priceTemop = response.xpath('.//*[@id="baseInfo"]/div[1]/em/text()').extract()
+
+        print(priceTemop)
+        if isinstance(priceTemop, list):
+            xinyang['price'] = response.xpath('.//*[@id="baseInfo"]/div[1]/em/text()').extract()[0]
+        else:
+            xinyang['price'] = response.xpath('.//*[@id="baseInfo"]/div[1]/em/text()').extract()
         xinyang['title']  =  response.xpath('.//*[@id="baseInfo"]/h1/text()').extract()[0]
         xinyang['product__appointment'] = response.xpath('.//*[@id="baseInfo"]/div[2]/div[3]/em/text()').extract()[0]
-        xinyang['daliy'] = response.xpath('.//*[@id="detail"]/div/div[2]/div[2]/ul/li[4]/h2/span/text()').extract()[0]
+        if isinstance(priceTemop, list):
+            xinyang['daliy'] = response.xpath('.//*[@id="baseInfo"]/div[1]/em/text()').extract()[0]
+        else:
+            xinyang['daliy'] = ""
         #xinyang['sale'] = response.xpath('/div/div[2]/span/text()').extract_first()
         xinyang['comment'] = response.xpath('.//*[@id="detail"]/div/div[2]/div[2]/ul/li[3]/h2/span/text()').extract()[0]
         yield  xinyang
